@@ -33,6 +33,17 @@
                 <input asp-for="Movie.Price" class="form-control" />
                 <span asp-validation-for="Movie.Price" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="Movie.HeroId" class="control-label">Hero</label>
+                <select name="Movie.heroId" asp-items="Model.Hero">
+                    <option value="">Choose a Hero</option>
+                </select>
+                <span asp-validation-for="Movie.HeroId" class="text-danger"></span>
+            </div>
+
+            <br />
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

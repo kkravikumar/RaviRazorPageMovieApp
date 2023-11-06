@@ -19,14 +19,24 @@ namespace RaviRazorPageMovieApp.Pages.Movies
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
         public Movie Movie { get; set; } = default!;
         
+        public List<SelectListItem> Hero { get; set; }
+
+
+
+        public IActionResult OnGet()
+        {
+            Hero = _context.Actors.Select(a =>
+                        new SelectListItem() {
+                            Value = a.Id.ToString(),
+                            Text = a.Name
+                        }
+                        ).ToList();
+
+            return Page();
+        }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +45,7 @@ namespace RaviRazorPageMovieApp.Pages.Movies
             {
                 return Page();
             }
-
+            
             _context.Movies.Add(Movie);
             await _context.SaveChangesAsync();
 
